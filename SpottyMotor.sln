@@ -3,9 +3,32 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{0C047CB7-3781-4BA4-AD59-69D94D964CE4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{F5C38CE0-D52B-4897-8F77-A510A7314D43}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{6E88EC0B-3FC9-49A9-84BB-A32FF3EEA472}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F6D8ECB5-F017-444A-9022-22FD550334CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerWebUI", "BlazorServerWebUI\BlazorServerWebUI.csproj", "{932E2EFA-0F7E-4496-A6E6-E5F5997CD691}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{932E2EFA-0F7E-4496-A6E6-E5F5997CD691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{932E2EFA-0F7E-4496-A6E6-E5F5997CD691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{932E2EFA-0F7E-4496-A6E6-E5F5997CD691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{932E2EFA-0F7E-4496-A6E6-E5F5997CD691}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{932E2EFA-0F7E-4496-A6E6-E5F5997CD691} = {F6D8ECB5-F017-444A-9022-22FD550334CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE3FCA15-C7DF-4916-87BB-6EF96C20F35F}

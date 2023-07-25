@@ -1,0 +1,13 @@
+﻿.btn-sign-up {
+    background: #FF0037;
+    border: 1px solid #FF0037;
+}
+.btn-login {
+    border: 1px solid #FF0037;
+}
+
+@media (max-width: 992px) {
+    .text-end {
+        text-align: left!important;
+    }
+}
