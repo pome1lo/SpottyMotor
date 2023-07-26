@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JWTAuthenticationManager\JWTAuthenticationManager.csproj" />
+    <ProjectReference Include="..\TokenHandlerModels.Shared\TokenHandlerModels.Shared.csproj" />
   </ItemGroup>
 
 </Project>

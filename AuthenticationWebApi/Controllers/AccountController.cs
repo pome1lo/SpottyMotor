@@ -2,6 +2,8 @@
 using JWTAuthenticationManager;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TokenHandlerModels.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AuthenticationWebApi.Controllers
 {
@@ -17,6 +19,8 @@ namespace AuthenticationWebApi.Controllers
         }
 
         [HttpPost]
+        //[Route("Login")]
+        [AllowAnonymous]
         public ActionResult<AuthenticationResponse?> Authenticate([FromBody] AuthenticationRequest request)
         {
             var authenticationResponse = _jwtTokenHandler.GenerateJwtToken(request);

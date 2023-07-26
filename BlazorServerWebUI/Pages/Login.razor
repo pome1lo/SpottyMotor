@@ -1,18 +1,27 @@
 ﻿@page "/login"
+@using BlazorServerWebUI.Models; 
+@using System.Net; 
+@using TokenHandlerModels.Shared;
+@inject HttpClient httpClient
+@inject IJSRuntime js
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager navManager
 <PageTitle>Login</PageTitle>
 
 <div style="max-width: 300px; margin: auto">
     <main class="form-signin w-100 m-auto">
-        <form>
+        @*<form>*@
+        <div>
+
             <img class="mb-4" src="img/Logo.svg" alt="" width="130" >
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <input @bind="loginRequest.UserName" type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
                 <label for="floatingInput">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <input @bind="loginRequest.Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
                 <label for="floatingPassword">Password</label>
             </div>
 
@@ -22,8 +31,33 @@
                     Remember me
                 </label>
             </div>
-            <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+            <button @onclick="Authenticate" class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
             <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
-        </form>
+        @*</form>*@
+        </div>
     </main>
 </div>
+
+@code {
+    private AuthenticationRequest loginRequest = new();
+
+    private async Task Authenticate()
+    {
+        var loginResponse = await httpClient.PostAsJsonAsync<AuthenticationRequest>("/api/Account", loginRequest);
+ 
+        if (loginResponse.IsSuccessStatusCode)
+        {
+            var userSession = await loginResponse.Content.ReadFromJsonAsync<AuthenticationResponse>();
+            var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+            await customAuthStateProvider.UpdateAuthenticationState(userSession);
+            
+            await js.InvokeVoidAsync("alert", $"TEST");
+            navManager.NavigateTo("/", true);
+        }
+        else if (loginResponse.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            await js.InvokeVoidAsync("alert", "Invalid User Name or Password");
+            return;
+        }
+    }
+}

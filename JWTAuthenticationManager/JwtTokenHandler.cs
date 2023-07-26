@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TokenHandlerModels.Shared;
 
 namespace JWTAuthenticationManager
 {
@@ -16,21 +17,21 @@ namespace JWTAuthenticationManager
         {
             _userAccountList = new List<UserAccount>()
             {
-                new UserAccount { UserName = "admin", Password = "admin123", Role = "Administrator"},
-                new UserAccount { UserName = "user1", Password = "user1", Role = "User"}
+                new UserAccount { UserName = "admin", Password = "123", Role = "Administrator"},
+                new UserAccount { UserName = "user", Password = "123", Role = "User"}
             };
         }
 
         public AuthenticationResponse? GenerateJwtToken(AuthenticationRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
-                return null; // хуета
+                return null;  
 
             //validation
 
             var userAccount = _userAccountList.Where(x => x.UserName == request.UserName && x.Password == request.Password).FirstOrDefault();
             if (userAccount is null)
-                return null;// xуета
+                return null; 
 
             var tokenExpiryTimeStamp = DateTime.Now.AddMinutes(JWT_TOKEN_VALIDITY_MINS);
             var tokenkey = Encoding.ASCII.GetBytes(JWT_SECURITY_KEY);
@@ -60,7 +61,8 @@ namespace JWTAuthenticationManager
             {
                 UserName = userAccount.UserName,
                 ExpiresIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.Now).TotalSeconds,
-                JwtToken = token
+                Role = userAccount.Role,
+                Token = token
             };
         }
     }

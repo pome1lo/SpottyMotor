@@ -1,4 +1,4 @@
-﻿namespace JWTAuthenticationManager.Models
+﻿namespace TokenHandlerModels.Shared
 {
     public class AuthenticationRequest
     {
