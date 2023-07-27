@@ -3,7 +3,7 @@
     
     // Authentication Web API
     {
-      "UpstreamPathTemplate": "/api/Account/",
+      "UpstreamPathTemplate": "/api/Account/{action}",
       "UpstreamHttpMethod": [ "Post" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -12,7 +12,7 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Account"
+      "DownstreamPathTemplate": "/api/Account/{action}"
     }
 
   ],

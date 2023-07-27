@@ -11,34 +11,15 @@ namespace JWTAuthenticationManager
     {
         public const string JWT_SECURITY_KEY = "ksdjfosjf8sufjhsf8sd7fsdhfsdhiof";
         private const int JWT_TOKEN_VALIDITY_MINS = 20;
-        private readonly List<UserAccount> _userAccountList;
 
-        public JwtTokenHandler()
+        public AuthenticationResponse? GenerateJwtToken(UserAccount userAccount)
         {
-            _userAccountList = new List<UserAccount>()
-            {
-                new UserAccount { UserName = "admin", Password = "123", Role = "Administrator"},
-                new UserAccount { UserName = "user", Password = "123", Role = "User"}
-            };
-        }
-
-        public AuthenticationResponse? GenerateJwtToken(AuthenticationRequest request)
-        {
-            if (string.IsNullOrWhiteSpace(request.UserName) || string.IsNullOrWhiteSpace(request.Password))
-                return null;  
-
-            //validation
-
-            var userAccount = _userAccountList.Where(x => x.UserName == request.UserName && x.Password == request.Password).FirstOrDefault();
-            if (userAccount is null)
-                return null; 
-
             var tokenExpiryTimeStamp = DateTime.Now.AddMinutes(JWT_TOKEN_VALIDITY_MINS);
             var tokenkey = Encoding.ASCII.GetBytes(JWT_SECURITY_KEY);
             var claimsIdentify = new ClaimsIdentity(new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Name, request.UserName),
-                new Claim("Role", userAccount.Role),
+                new Claim(JwtRegisteredClaimNames.Name, userAccount.Email),
+                new Claim("Role", userAccount.Role.RoleName),
             });
 
             var signingCredentials = new SigningCredentials(
@@ -59,9 +40,9 @@ namespace JWTAuthenticationManager
 
             return new AuthenticationResponse
             {
-                UserName = userAccount.UserName,
+                UserName = userAccount.Email,
                 ExpiresIn = (int)tokenExpiryTimeStamp.Subtract(DateTime.Now).TotalSeconds,
-                Role = userAccount.Role,
+                Role = userAccount.Role.RoleName,
                 Token = token
             };
         }

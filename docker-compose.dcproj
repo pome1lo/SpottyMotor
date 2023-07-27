@@ -5,8 +5,8 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>56e93d5f-6b41-45cd-8eb2-0b7f334b22d0</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
-    <DockerServiceName>authenticationwebapi</DockerServiceName>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
+    <DockerServiceName>blazorserverwebui</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">

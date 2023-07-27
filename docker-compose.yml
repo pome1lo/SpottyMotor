@@ -24,6 +24,21 @@ services:
       dockerfile: AuthenticationWebApi/Dockerfile
     networks:
     - backend
+    environment:
+    - DB_HOST=useraccountauthdb
+    - DB_NAME=user_accounts
+    - DB_SA_PASSWORD=password@12345
+
+  useraccountauthdb:
+    container_name: user-account-db
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment: 
+     - ACCEPT_EULA=Y
+     - SA_PASSWORD=password@12345
+    networks:
+     - backend
+    ports:
+     - 18001:1433
 
   apigateway:
     container_name: web-gateway-api
