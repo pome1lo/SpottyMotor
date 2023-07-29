@@ -61,8 +61,8 @@ services:
     networks:
     - backend
     environment:
-    - DB_HOST=productdb
-    - DB_NAME=product
+    - DB_HOST=cardb
+    - DB_NAME=car
     - POSTGRES_PASSWORD=@2o!&69
 
   cardb:

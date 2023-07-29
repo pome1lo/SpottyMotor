@@ -1,5 +1,6 @@
 ﻿using AuthenticationWebApi.Database;
 using JWTAuthenticationManager.Models;
+using Microsoft.EntityFrameworkCore;
 using TokenHandlerModels.Shared;
 
 namespace AuthenticationWebApi.Services
@@ -15,7 +16,9 @@ namespace AuthenticationWebApi.Services
         internal bool GetUserOrDefault(AuthenticationRequest request, out UserAccount? user)
         {
 
-            user = _context.Users.Where(x => x.Email == request.Email && x.Password == request.Password).FirstOrDefault();
+            user = _context.Users.Include(x => x.Role)
+                .Where(x => x.Email == request.Email && x.Password == request.Password)
+                .FirstOrDefault();
 
             if (user is null)
             {
@@ -26,7 +29,8 @@ namespace AuthenticationWebApi.Services
 
         internal bool IsThereSuchUser(AuthenticationRequest request, out UserAccount? user)
         {
-            user = _context.Users.Where(x => x.Email == request.Email).FirstOrDefault();
+            user = _context.Users.Include(x => x.Role)
+                .Where(x => x.Email == request.Email).FirstOrDefault();
             var userRole = _context.UserRoles.Where(x => x.RoleName == "User").FirstOrDefault();
             if (user is null)
             {
