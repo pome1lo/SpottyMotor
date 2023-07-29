@@ -51,3 +51,27 @@ services:
     networks:
     - backend
     - frontend
+
+  carwebapi:
+    container_name: car-api
+    image: ${DOCKER_REGISTRY-}carwebapi
+    build:
+      context: .
+      dockerfile: CarWebApi/Dockerfile
+    networks:
+    - backend
+    environment:
+    - DB_HOST=productdb
+    - DB_NAME=product
+    - POSTGRES_PASSWORD=@2o!&69
+
+  cardb:
+    container_name: car-db
+    image: postgres
+    restart: always
+    environment:
+    - POSTGRES_PASSWORD=@2o!&69
+    networks:
+    - backend
+    ports:
+    - 18002:5432

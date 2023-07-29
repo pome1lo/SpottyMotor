@@ -1,6 +1,40 @@
 {
   "Routes": [
-    
+    // Car Web API
+    {
+      "UpstreamPathTemplate": "/api/Car",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "carwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Car",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administrator"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Car/{carId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "carwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Car/{carId}"
+    },
+
     // Authentication Web API
     {
       "UpstreamPathTemplate": "/api/Account/{action}",

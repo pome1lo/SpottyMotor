@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenHandlerModels.Shared", "TokenHandlerModels.Shared\TokenHandlerModels.Shared.csproj", "{2B2414DE-89CF-49FB-9D51-ACEFB5A76158}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWebApi", "CarWebApi\CarWebApi.csproj", "{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{2B2414DE-89CF-49FB-9D51-ACEFB5A76158}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2414DE-89CF-49FB-9D51-ACEFB5A76158}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2414DE-89CF-49FB-9D51-ACEFB5A76158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -63,6 +69,7 @@ Global
 		{376E257E-AB9E-48FE-B3CE-5F171F5043F9} = {0C047CB7-3781-4BA4-AD59-69D94D964CE4}
 		{D4D7B115-1BFC-4419-A295-EE3729ABAAB7} = {F5C38CE0-D52B-4897-8F77-A510A7314D43}
 		{2B2414DE-89CF-49FB-9D51-ACEFB5A76158} = {6E88EC0B-3FC9-49A9-84BB-A32FF3EEA472}
+		{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36} = {0C047CB7-3781-4BA4-AD59-69D94D964CE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE3FCA15-C7DF-4916-87BB-6EF96C20F35F}
