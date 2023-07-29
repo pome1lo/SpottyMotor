@@ -7,11 +7,11 @@ namespace CarWebApi.Database
 {
     public class CarDbContext : DbContext
     {
-        public DbSet<Car> Cars { get; set; } = null!;
         public DbSet<CarBody> CarBodies { get; set; } = null!;
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Transmission> Transmissions { get; set; } = null!;
         public DbSet<Characteristics> Characteristics { get; set; } = null!;
+        public DbSet<Car> Cars { get; set; } = null!;
 
         public CarDbContext(DbContextOptions<CarDbContext> dbContextOptions) : base(dbContextOptions)
         {

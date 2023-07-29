@@ -3,23 +3,35 @@
 @inject HttpClient httpClient
 <PageTitle>Catalog</PageTitle>
 
+
 <div>
-    @foreach (var item in allCars)
+    <h1>Cars</h1>
+    @if (allCars != null && allCars.Count != 0)
     {
-    
+        foreach (var item in allCars)
+        {
+            <h1>@item.CarName</h1>
+            <p>@item.Price</p>
+        }
+    }
+    else
+    {
+       <h4 class="text-center" colspan="5">No cars to display</h4>
     }
 </div>
-@code {
-    private List<CarViewModel> allCars = null!;
 
-     protected override async Task OnInitializedAsync()
+@code {
+    private List<CarViewModel> allCars;
+
+    protected override async Task OnInitializedAsync()
     {
-        await FetchCarList();
         await base.OnInitializedAsync();
+        await FetchCarList();
     }
 
     private async Task FetchCarList()
     {
-        this.allCars = await httpClient.GetFromJsonAsync<List<CarViewModel>>("api/Car") ?? new();
+        this.allCars = await httpClient.GetFromJsonAsync<List<CarViewModel>>("api/Car");
+        
     }
 }

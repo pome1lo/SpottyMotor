@@ -40,8 +40,6 @@
 
     private async Task Authenticate()
     {
-        await js.InvokeVoidAsync("alert", "AUTH");
-
         var loginResponse = await httpClient.PostAsJsonAsync<AuthenticationRequest>("/api/Account/Login", loginRequest);
  
         if (loginResponse.IsSuccessStatusCode)
