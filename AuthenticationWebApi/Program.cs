@@ -19,6 +19,8 @@ builder.Services.AddDbContext<UserAccountDbContext>(opt => opt.UseSqlServer(conn
 builder.Services.AddSingleton<JwtTokenHandler>();
 builder.Services.AddSingleton<ProviderMailService>();
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

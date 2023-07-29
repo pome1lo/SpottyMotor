@@ -17,7 +17,6 @@ namespace JWTAuthenticationManager.Models
         [Column("user_role_id")]
         public int RoleId { get; set; }
         [Column("user_role")]
-        public UserRole? Role { get; set; } 
-
+        public UserRole Role { get; set; } = null!;
     }
 }

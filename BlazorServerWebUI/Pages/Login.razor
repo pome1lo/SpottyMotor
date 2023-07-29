@@ -1,93 +1,47 @@
 ﻿@page "/login"
-@using BlazorServerWebUI.Models; 
-@using System.Net; 
-@using TokenHandlerModels.Shared;
 @inject HttpClient httpClient
 @inject IJSRuntime js
 @inject AuthenticationStateProvider authStateProvider
 @inject NavigationManager navManager
+
 <PageTitle>Login</PageTitle>
 
-<style type="text/css">
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
-    .form-signin input[type="email"] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
-</style>
 <div style="max-width: 300px; margin: auto">
     <main class="form-signin w-100 m-auto">
-        <div> 
-            <h1 class="h3 mb-3 fw-normal">Please <span style="text-transform:lowercase">@labelForm</span></h1>
-
-            <div class="form-floating">
-                <input @bind="loginRequest.Email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                <label for="floatingInput">Email address</label>
-            </div>
-            <div class="form-floating">
-                <input @bind="loginRequest.Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                <label for="floatingPassword">Password</label>
-            </div>
-            <div class="form-check d-flex justify-content-between my-3">
-                <div>
-                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Remember me
-                    </label>
-                </div>
-                <a @onclick="ChangeForm">@labelForm</a>
-            </div>
-            @if(loginRequest.IsAuthentication)
-            {
-                <button @onclick="Authenticate" class="btn btn-primary w-100 py-2" type="submit">@labelForm</button>
-            }
-            else
-            {
-                <button @onclick="Registration" class="btn btn-primary w-100 py-2" type="submit">@labelForm</button>
-            }
-            <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <div class="form-floating">
+                <input @bind="loginRequest.Email" type="email" class="input-validation-error form-control" id="floatingInput" placeholder="name@example.com" required>
+            <label for="floatingInput">Email address</label>
+            <div class="valid-feedback">Все хорошо!</div>
+            <div class="invalid-feedback">Пожалуйста, предоставьте действующий почтовый индекс.</div>
         </div>
-
+        <div class="form-floating">
+            <input @bind="loginRequest.Password" type="password" class="input-validation-error form-control" id="floatingPassword" placeholder="Password" required>
+            <label for="floatingPassword">Password</label>
+            <div class="valid-feedback">Все хорошо!</div>
+            <div class="invalid-feedback">Пожалуйста, предоставьте действующий почтовый индекс.</div>
+        </div>
+        <div class="form-check d-flex justify-content-between my-3">
+            <div>
+                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault" >
+                <label class="form-check-label" for="flexCheckDefault">
+                    Remember me
+                </label>
+            </div> 
+        </div>
+          
+        <button @onclick="Authenticate" class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; 2023</p>
     </main>
 </div>
  
 @code {
     private AuthenticationRequest loginRequest = new();
 
-    private string labelForm = "Sign in";
-
-    private void ChangeForm()
-    {
-        loginRequest.IsAuthentication = !loginRequest.IsAuthentication;
-        labelForm = (loginRequest.IsAuthentication ? "Sign in" : "Join");
-    }
-
-    private async Task Registration()
-    {
-        var loginResponse = await httpClient.PostAsJsonAsync<AuthenticationRequest>("/api/Account/Register", loginRequest);
-        await js.InvokeVoidAsync("alert", "REG");
-        if(loginResponse.IsSuccessStatusCode)
-        {
-            await js.InvokeVoidAsync("alert", "success");
-            return;
-        }
-        else if (loginResponse.StatusCode == HttpStatusCode.Unauthorized)
-        {
-            await js.InvokeVoidAsync("alert", "NOT success");
-            return;
-        }
-
-    }
-
     private async Task Authenticate()
     {
         await js.InvokeVoidAsync("alert", "AUTH");
+
         var loginResponse = await httpClient.PostAsJsonAsync<AuthenticationRequest>("/api/Account/Login", loginRequest);
  
         if (loginResponse.IsSuccessStatusCode)

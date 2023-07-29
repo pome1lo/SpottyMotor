@@ -14,12 +14,15 @@ namespace AuthenticationWebApi.Controllers
     {
         private readonly JwtTokenHandler _jwtTokenHandler;
         private readonly UserAccountDbContext _context;
+        private readonly ProviderMailService _emailService;
+
         private UserAccountService _userService;
 
-        public AccountController(JwtTokenHandler jwtTokenHandler, UserAccountDbContext context)
+        public AccountController(JwtTokenHandler jwtTokenHandler, UserAccountDbContext context, ProviderMailService email)
         {
             _jwtTokenHandler = jwtTokenHandler;
             _context = context;
+            _emailService = email;
             _userService = new UserAccountService(_context);
         }
 
@@ -42,20 +45,34 @@ namespace AuthenticationWebApi.Controllers
         [HttpPost]
         [Route("Register")]
         [AllowAnonymous]
-        public async Task<ActionResult<AuthenticationResponse?>> Registration([FromBody] AuthenticationRequest request)
+        public ActionResult<AuthenticationResponse?> Registration([FromBody] AuthenticationRequest request)
         {
             UserAccount? user;
             if (request.IsNotEmpty() && _userService.IsThereSuchUser(request, out user))
             {
                 _context.Users.Add(user);
                 _context.SaveChanges();
-
-                return _jwtTokenHandler.GenerateJwtToken(user);
+                return Ok();
             }
             return Unauthorized();
+        }
 
-            //var emailService = new ProviderMailService();
-            //await emailService.SendEmailAsync(request.Email, );
+
+        [HttpPost]
+        [Route("VerifyEmail")]
+        [AllowAnonymous]
+        public async Task<ActionResult> VerifyEmail([FromBody] AuthenticationRequest request)
+        {
+            if (request.IsNotEmpty() && _userService.IsThereSuchUser(request.Email))
+            {
+                await _emailService.SendEmailAsync(
+                    request.Email,
+                    "Email verification",
+                    $"Your verification code is: {request.EmailConfirmationCode}"
+                );
+                return Ok();
+            }
+            return Unauthorized();
         }
     }
 }

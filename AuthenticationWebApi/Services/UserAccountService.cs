@@ -20,7 +20,7 @@ namespace AuthenticationWebApi.Services
             if (user is null)
             {
                 return false;
-            }
+            } 
             return true;
         }
 
@@ -39,6 +39,10 @@ namespace AuthenticationWebApi.Services
                 return true;
             }
             return false;
+        }
+        internal bool IsThereSuchUser(string Email)
+        {
+            return !_context.Users.Any(x => x.Email == Email);
         }
     }
 }
