@@ -17,7 +17,7 @@ namespace CarWebApi.Models
         public int YearReleased { get; set; }
 
         [Column("characteristics_interior_color")]
-        public string InteriorColor{ get; set; } = string.Empty;
+        public string InteriorColor { get; set; } = string.Empty;
 
         [Column("characteristics_car_body_id")]
         public int CarBodyId { get; set; }

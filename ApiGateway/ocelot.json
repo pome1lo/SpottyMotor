@@ -12,14 +12,14 @@
           "Port": 80
         }
       ],
-      "DownstreamPathTemplate": "/api/Car",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      },
-      "RouteClaimsRequirement": {
-        "Role": "Administrator"
-      }
+      "DownstreamPathTemplate": "/api/Car"//,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer",
+      //  "AllowedScopes": []
+      //},
+      //"RouteClaimsRequirement": {
+      //  "Role": "Administrator"
+      //}
     },
     {
       "UpstreamPathTemplate": "/api/Car/{carId}",

@@ -1,6 +1,9 @@
 ﻿@page "/catalog"
 @using BlazorServerWebUI.Models.ViewModels;
+@using System.Net.Http.Headers;
 @inject HttpClient httpClient
+@inject NavigationManager navManager
+@inject AuthenticationStateProvider authenticationStateProvider
 <PageTitle>Catalog</PageTitle>
 
 
@@ -8,11 +11,13 @@
     <h1>Cars</h1>
     @if (allCars != null && allCars.Count != 0)
     {
-        foreach (var item in allCars)
-        {
-            <h1>@item.CarName</h1>
-            <p>@item.Price</p>
-        }
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
+            @foreach (var car in allCars)
+            {
+                <CatalogItem Car="car"></CatalogItem>
+                
+            }
+        </div>
     }
     else
     {
@@ -21,7 +26,7 @@
 </div>
 
 @code {
-    private List<CarViewModel> allCars;
+    private List<CarViewModel> allCars = null!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,7 +36,37 @@
 
     private async Task FetchCarList()
     {
-        this.allCars = await httpClient.GetFromJsonAsync<List<CarViewModel>>("api/Car");
-        
+        try
+        {
+            allCars = await httpClient.GetFromJsonAsync<List<CarViewModel>>("api/Car");
+
+        }
+        catch (Exception ex)
+        {
+            
+            Console.WriteLine(ex.Message);
+        }
     }
+
+    //private async Task FetchCarList()
+    //{
+    //    try
+    //    {
+    //        var customAuthStateProvider = (CustomAuthenticationStateProvider)authenticationStateProvider;
+    //        var token = await customAuthStateProvider.GetToken();
+    //        if (!string.IsNullOrWhiteSpace(token))
+    //        {
+    //            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
+    //            allCars = await httpClient.GetFromJsonAsync<List<CarViewModel>>("api/Car");
+    //        }
+    //        else
+    //        {
+    //            navManager.NavigateTo("/login");
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        Console.WriteLine(ex.Message );
+    //    }
+    //}
 }

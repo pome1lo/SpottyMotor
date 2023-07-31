@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenHandlerModels.Shared", "TokenHandlerModels.Shared\TokenHandlerModels.Shared.csproj", "{2B2414DE-89CF-49FB-9D51-ACEFB5A76158}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarWebApi", "CarWebApi\CarWebApi.csproj", "{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarWebApi", "CarWebApi\CarWebApi.csproj", "{2EEF57F1-D2A8-4816-BF6F-6FC6313BBC36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

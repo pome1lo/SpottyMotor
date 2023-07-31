@@ -1,0 +1,10 @@
+﻿@page "/catalog/{}"
+@using BlazorServerWebUI.Models.ViewModels;
+<PageTitle>@Car.CarName</PageTitle>
+
+
+
+@code {
+
+    private CarViewModel Car { get; set; } = null!;
+}

@@ -13,6 +13,9 @@ namespace CarWebApi.Models
         [Column("car_price")]
         public decimal Price { get; set; }
 
+        [Column("car_image")]
+        public string Image { get; set; } = string.Empty;
+
         [Column("car_name")]
         public string CarName { get; set; } = string.Empty;
 
