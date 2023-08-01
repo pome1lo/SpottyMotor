@@ -1,6 +1,5 @@
 ﻿using CarWebApi.Database;
 using CarWebApi.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,10 +24,12 @@ namespace CarWebApi.Controllers
                 .Include(x => x.Characteristics).ThenInclude(x => x.CarBody).ToList();
         }
 
-        [HttpGet("{carId:int}")]
+        [HttpGet("{carId}")]
         public ActionResult<Car?> GetCarById(int carId)
         {
-            return GetCars().Value?.Find(x=>x.Id ==carId);
+            var s = GetCars().Value?.Find(x => x.Id == carId);
+            return s;
+
         }
 
         [HttpPost]

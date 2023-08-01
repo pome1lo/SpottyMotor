@@ -1,6 +1,8 @@
 ﻿@using BlazorServerWebUI.Models.ViewModels;
+@inject HttpClient httpClient
+@inject NavigationManager navManager
 
-<div class="col" data-aos="zoom-in-up">
+<div class="col" data-aos="zoom-in-up" @onclick="GoToTheCurrentCar">
     <div class="card shadow-sm">
 
         <div class="scale">
@@ -34,4 +36,9 @@
 @code {
     [Parameter]
     public CarViewModel Car { get; set; } = null!;
+
+    private async Task GoToTheCurrentCar()
+    {
+        await httpClient.GetAsync($"catalog/car/{Car.Id}");
+    }
 }
