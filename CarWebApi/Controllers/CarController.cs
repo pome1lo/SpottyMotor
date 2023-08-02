@@ -27,9 +27,7 @@ namespace CarWebApi.Controllers
         [HttpGet("{carId}")]
         public ActionResult<Car?> GetCarById(int carId)
         {
-            var s = GetCars().Value?.Find(x => x.Id == carId);
-            return s;
-
+            return GetCars().Value?.Find(x => x.Id == carId);
         }
 
         [HttpPost]

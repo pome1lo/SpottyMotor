@@ -2,7 +2,7 @@
 @inject HttpClient httpClient
 @inject NavigationManager navManager
 
-<div class="col" data-aos="zoom-in-up" @onclick="GoToTheCurrentCar">
+<a href="catalog/car/@Car.Id" class="col" data-aos="zoom-in-up">
     <div class="card shadow-sm">
 
         <div class="scale">
@@ -31,14 +31,9 @@
 
         <p><b>$ @Car.Price</b></p>
     </div>
-</div>
+</a>
 
 @code {
     [Parameter]
     public CarViewModel Car { get; set; } = null!;
-
-    private async Task GoToTheCurrentCar()
-    {
-        await httpClient.GetAsync($"catalog/car/{Car.Id}");
-    }
 }

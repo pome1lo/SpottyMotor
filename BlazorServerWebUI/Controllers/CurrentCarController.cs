@@ -1,10 +1,5 @@
 ﻿using BlazorServerWebUI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Http;
-using System.Net.Http.Json;
-using TokenHandlerModels.Shared;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BlazorServerWebUI.Controllers
 {
@@ -15,18 +10,19 @@ namespace BlazorServerWebUI.Controllers
 
         [HttpGet]
         [Route("car/{carId:int}")]
-        public async Task<ViewResult> GetCurrentCarPage(int carId)
+        public async Task<ViewResult> CurrentCar(int? carId)
         {
+            HttpClient httpClient = new HttpClient();
             try
             {
-                HttpClient httpClient = new HttpClient();
                 var car = await httpClient.GetFromJsonAsync<CarViewModel?>($"http://apigateway/api/Car/{carId}");
+                Console.WriteLine("LIKE LIKE LIKE LIKE LIKE", ConsoleColor.Green);
                 return View(car);
             }
             catch (Exception ex)
             {
-                    Console.WriteLine(ex.Message);
-                return View(new CarViewModel());
+                Console.WriteLine(ex.Message, ConsoleColor.Red);
+                return View();
             }
         }
     }
