@@ -1,0 +1,19 @@
+﻿@model SpecificationItemViewModel
+
+
+<li class="mb-1">
+    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#@Model.IdName" aria-expanded="false">
+        @Model.Heading
+    </button>
+    <div class="collapse" id="@Model.IdName" style="">
+        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            @if (Model.List != null && Model.List.Count != 0)
+            {
+                @foreach (var item in Model.List)
+                {
+                    <li>@item</li>
+                }
+            }
+        </ul>
+    </div>
+</li>

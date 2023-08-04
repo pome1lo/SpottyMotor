@@ -19,7 +19,7 @@ namespace CarWebApi.Controllers
         [HttpGet]
         public ActionResult<List<Car>> GetCars()
         {
-            return _context.Cars.Include(x => x.Category)
+            return _context.Cars.Include(x => x.Category).Include(x=>x.Specification)
                 .Include(x => x.Characteristics).ThenInclude(x => x.Transmission)
                 .Include(x => x.Characteristics).ThenInclude(x => x.CarBody).ToList();
         }

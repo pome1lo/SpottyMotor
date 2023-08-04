@@ -11,6 +11,7 @@ namespace CarWebApi.Database
         public DbSet<Category> Categories { get; set; } = null!;
         public DbSet<Transmission> Transmissions { get; set; } = null!;
         public DbSet<Characteristics> Characteristics { get; set; } = null!;
+        public DbSet<Specification> Specifications { get; set; } = null!;
         public DbSet<Car> Cars { get; set; } = null!;
 
         public CarDbContext(DbContextOptions<CarDbContext> dbContextOptions) : base(dbContextOptions)
