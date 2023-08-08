@@ -50,3 +50,12 @@
     color: white;
     background: #FF0037
 }
+
+.list-stages li {
+    color: red;
+    font-weight: bolder;
+}
+.list-stages li small {
+    color: black;
+    font-weight: normal;
+}

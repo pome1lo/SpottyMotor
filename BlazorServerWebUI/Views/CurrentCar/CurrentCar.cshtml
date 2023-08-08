@@ -1,7 +1,7 @@
 ﻿@model CarViewModel
 
 <main>
-    <div class="row align-items-center g-lg-5 py-5">
+    <div class="row g-lg-5 py-5">
         <div class="col-lg-7">
 
 
@@ -29,7 +29,10 @@
                 </button>
             </div>
 
-            <p>Information, illustrations of the appearance and equipment of the car may differ from those provided on the website.</p>
+            <div class="row">
+                <img src="~/img/warn.svg" width="20"/>
+                <p style="color:#767676">Information, illustrations of the appearance and equipment of the car may differ from those provided on the website.</p>
+            </div>
 
             <h3>More about the car</h3>
 
@@ -37,7 +40,7 @@
 
         </div>
         <div class="col-lg-5">
-            <h2>@Model.CarName</h2>
+            <h1 style="font-weight: bolder">@Model.CarName</h1>
 
             <div class="d-flex" style="flex-wrap: wrap">
                 <div class="mini-red-block">
@@ -57,104 +60,33 @@
                 </div>
             </div>
 
-            <h1>$ @Model.Price</h1>
-
+            <h3>$ @Model.Price</h3>
             
+            <div class="d-flex gap-2 ">
+                <button class="btn btn-primary d-inline-flex align-items-center" type="button">Write to the seller</button>
+                <button class="btn btn-danger rounded-pill" style="background: #FF0037;">
+                    <img src="~/img/heart.svg" />
+                </button>
+            </div>
 
             <ul class="list-unstyled ps-0">
-
                 @Html.Partial("ItemSpecification", new SpecificationItemViewModel("one", "Engine", Model.Specification.Engine))
                 @Html.Partial("ItemSpecification", new SpecificationItemViewModel("two", "Dimensions of the car", Model.Specification.Dimensions))
                 @Html.Partial("ItemSpecification", new SpecificationItemViewModel("three", "Operational characteristics", Model.Specification.OperationalCharacteristics))
                 @Html.Partial("ItemSpecification", new SpecificationItemViewModel("four", "Factory options", Model.Specification.FactoryOptions))
                 @Html.Partial("ItemSpecification", new SpecificationItemViewModel("five", "Advantages", Model.Specification.Advantages))
-
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false">
-                        Engine
-                    </button>
-                    <div class="collapse" id="home-collapse" style="">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            @if (Model.Specification.Engine != null && Model.Specification.Engine.Count != 0)
-                            {
-                                @foreach (var item in Model.Specification.Engine)
-                                {
-                                    <li>@item</li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#second-collapse" aria-expanded="false">
-                        Dimensions of the car
-                    </button>
-                    <div class="collapse" id="second-collapse" style="">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            @if (Model.Specification.Dimensions != null && Model.Specification.Dimensions.Count != 0)
-                            {
-                                @foreach (var item in Model.Specification.Dimensions)
-                                {
-                                    <li>@item</li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#third-collapse" aria-expanded="false">
-                        Operational characteristics
-                    </button>
-                    <div class="collapse" id="third-collapse" style="">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            @if (Model.Specification.OperationalCharacteristics != null && Model.Specification.OperationalCharacteristics.Count != 0)
-                            {
-                                @foreach (var item in Model.Specification.OperationalCharacteristics)
-                                {
-                                    <li>@item</li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#fourth-collapse" aria-expanded="false">
-                        Factory options
-                    </button>
-                    <div class="collapse" id="fourth-collapse" style="">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            @if (Model.Specification.FactoryOptions != null && Model.Specification.FactoryOptions.Count != 0)
-                            {
-                                @foreach (var item in Model.Specification.FactoryOptions)
-                                {
-                                    <li>@item</li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </li>
-                <li class="mb-1">
-                    <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#six-collapse" aria-expanded="false">
-                        Advantages
-                    </button>
-                    <div class="collapse" id="six-collapse" style="">
-                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            @if (Model.Specification.Advantages != null && Model.Specification.Advantages.Count != 0)
-                            {
-                                @foreach (var item in Model.Specification.Advantages)
-                                {
-                                    <li>@item</li>
-                                }
-                            }
-                        </ul>
-                    </div>
-                </li>
                 <li class="border-top my-3"></li>
-            
             </ul>
-
-
-
+             
+            <div class="align-items-center list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true" style="border: 1px solid #767676; padding: 25px; border-radius: 16px">
+                <img src="~/img/lising.png" alt="twbs" width="32" height="32" class="rounded-circle flex-shrink-0">
+                <div class="d-flex gap-2 w-100 justify-content-between">
+                    <div>
+                        <p class="mb-0 opacity-75">Leasing without income certificates and guarantors. Advance payment from 20%</p>
+                    </div>
+                </div>
+            </div>
+             
         </div>
     </div>
 </main>

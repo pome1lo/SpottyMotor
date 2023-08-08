@@ -34,7 +34,7 @@ namespace CarWebApi.Models
         [Column("car_characteristics")]
         public Characteristics Characteristics { get; set; } = null!;
 
-        [Column("car_specification ")]
+        [Column("car_specification")]
         public Specification Specification { get; set; } = null!;
     }
 }
